@@ -1,6 +1,6 @@
 import random
 
-import ui.widgets as widgets
+import gui.widgets as widgets
 from vendor.Qt import QtWidgets
 import lib
 
@@ -58,6 +58,7 @@ class Translate(QtWidgets.QWidget):
 
     def connections(self):
         self.random.toggled.connect(self.lock_sliders)
+        self.apply.clicked.connect(self.on_apply)
 
     def lock_sliders(self):
 
