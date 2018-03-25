@@ -104,15 +104,11 @@ class Rotate(QtWidgets.QWidget):
 
         approach = "relative" if self.relative.isChecked() else "absolute"
         if self.random.isChecked():
-            # random.seed(self.seed.getValue()
             min_range = self.min_value.value()
             max_range = self.max_value.value()
             x = random.uniform(min_range, max_range)
-            print("x is: %s" % x)
             y = random.uniform(min_range, max_range)
-            print("y is: %s" % y)
             z = random.uniform(min_range, max_range)
-            print("z is: %s" % z)
         else:
             x = self.rotate_x.getValue()
             y = self.rotate_y.getValue()
