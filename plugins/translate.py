@@ -16,8 +16,8 @@ class Translate(QtWidgets.QWidget):
 
         seed = widgets.SliderGroup(text="Seed")
         seed.setMaxValue(2000)
-        translate_y = widgets.SliderGroup(text="Translate X")
-        translate_x = widgets.SliderGroup(text="Translate Y")
+        translate_x = widgets.SliderGroup(text="Translate X")
+        translate_y = widgets.SliderGroup(text="Translate Y")
         translate_z = widgets.SliderGroup(text="Translate Z")
 
         options_layout = QtWidgets.QHBoxLayout()
