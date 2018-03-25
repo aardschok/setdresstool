@@ -1,8 +1,7 @@
 import random
 
 from vendor.Qt import QtWidgets
-
-from ui import widgets
+import gui.widgets as widgets
 import lib
 
 
@@ -47,9 +46,9 @@ class Rotate(QtWidgets.QWidget):
         self.random = random_btn
         self.apply = apply_btn
 
-        self.translate_y = rotate_y
-        self.translate_x = rotate_x
-        self.translate_z = rotate_z
+        self.rotate_y = rotate_y
+        self.rotate_x = rotate_x
+        self.rotate_z = rotate_z
 
         self.setLayout(layout)
 
@@ -59,13 +58,14 @@ class Rotate(QtWidgets.QWidget):
 
     def connections(self):
         self.random.toggled.connect(self.lock_sliders)
+        self.apply.clicked.connect(self.on_apply)
 
     def lock_sliders(self):
 
         state = not self.random.isChecked()
-        self.translate_x.setEnabled(state)
-        self.translate_y.setEnabled(state)
-        self.translate_z.setEnabled(state)
+        self.rotate_x.setEnabled(state)
+        self.rotate_y.setEnabled(state)
+        self.rotate_z.setEnabled(state)
         self.seed.setEnabled(not state)
 
     def on_apply(self):
@@ -77,11 +77,11 @@ class Rotate(QtWidgets.QWidget):
             z = random.seed(self.seed.getValue())
         else:
             approach = "relative" if self.relative.isChecked() else "absolute"
-            x = self.translate_x.getValue()
-            y = self.translate_y.getValue()
-            z = self.translate_z.getValue()
+            x = self.rotate_x.getValue()
+            y = self.rotate_y.getValue()
+            z = self.rotate_z.getValue()
 
-        lib.translate_offset(x, y, z, approach=approach)
+        lib.rotate_offset(x, y, z, approach=approach)
 
 
 if __name__ == '__main__':
