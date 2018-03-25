@@ -41,7 +41,7 @@ class App(QtWidgets.QWidget):
                                           self.buildFrame(widget))
             self.updateSize(widget)
 
-    def updateSize(self, widget, margin=40):
+    def updateSize(self, widget):
         height = (widget.sizeHint().height() - 5) + self.sizeHint().height()
         self.resize(self.sizeHint().width(), height)
 
