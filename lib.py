@@ -14,8 +14,9 @@ def translate_offset(x, y, z, approach):
         None
 
     """
+
     selection = cmds.ls(selection=True, type="transform")
-    cmds.move(selection, x, y, z, **{approach: True})
+    cmds.move(x, y, z, selection, **{approach: True})
 
 
 def rotate_offset(x, y, z, approach):
@@ -31,5 +32,6 @@ def rotate_offset(x, y, z, approach):
         None
 
     """
+
     selection = cmds.ls(selection=True, type="transform")
-    cmds.rotate(selection, x, y, z, **{approach: True})
+    cmds.rotate(x, y, z, selection, **{approach: True})
