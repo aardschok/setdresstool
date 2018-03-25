@@ -1,5 +1,6 @@
 import os
 import sys
+import site
 import types
 import inspect
 import logging
@@ -112,6 +113,12 @@ def discover(superclass):
     _registered_plugins.update(plugins)
 
     return sorted(plugins.values(), key=lambda Plugin: Plugin.__name__)
+
+
+def _install_dependencies():
+    """Temporary install function till import issues have been solved."""
+    # Install project folder
+    site.addsitedir(os.path.dirname(__file__))
 
 
 def registered_plugins():

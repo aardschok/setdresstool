@@ -1,5 +1,5 @@
 from vendor.Qt import QtWidgets
-from ui import widgets
+from gui import widgets
 import core
 
 
@@ -61,7 +61,6 @@ class App(QtWidgets.QWidget):
 
         vlayout = QtWidgets.QVBoxLayout()
         vlayout.addWidget(widget)
-        print(widget)
         frame = QtWidgets.QFrame(self)
         frame.setLayout(vlayout)
 
