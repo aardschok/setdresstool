@@ -24,7 +24,7 @@ class Translate(QtWidgets.QWidget):
 
         relative_btn = QtWidgets.QRadioButton("Relative")
         absolute_btn = QtWidgets.QRadioButton("Absolute")
-        random_btn = QtWidgets.QRadioButton("Random")
+        random_btn = QtWidgets.QCheckBox("Random")
         relative_btn.setChecked(True)
 
         apply_btn = QtWidgets.QPushButton("Apply")
@@ -70,13 +70,13 @@ class Translate(QtWidgets.QWidget):
 
     def on_apply(self):
 
+        approach = "relative" if self.relative.isChecked() else "absolute"
         if self.random.isChecked():
-            approach = random.choice(["relative", "absolute"])
-            x = random.seed(self.seed.getValue())
-            y = random.seed(self.seed.getValue())
-            z = random.seed(self.seed.getValue())
+            random.seed(self.seed.getValue())
+            x = random.random() * (self.seed.getValue() / 10)
+            y = random.random() * (self.seed.getValue() / 10)
+            z = random.random() * (self.seed.getValue() / 10)
         else:
-            approach = "relative" if self.relative.isChecked() else "absolute"
             x = self.translate_x.getValue()
             y = self.translate_y.getValue()
             z = self.translate_z.getValue()
