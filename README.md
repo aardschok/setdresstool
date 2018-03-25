@@ -4,6 +4,8 @@ _This tool is currently a work in progress._
 
 Tool for collection of plugins which benefit the set dress workflow.
 
+[![https://gyazo.com/21260b4f5acf143e56b6df8122fd2d66](https://i.gyazo.com/21260b4f5acf143e56b6df8122fd2d66.png)](https://gyazo.com/21260b4f5acf143e56b6df8122fd2d66)
+
 ## Details
 By adding modules to the plugin folder the tool will add the plugin to the window.
 This makes it easier to control the content of the tool by adding or removing modules.
