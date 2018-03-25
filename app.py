@@ -61,7 +61,6 @@ class App(QtWidgets.QWidget):
 
         vlayout = QtWidgets.QVBoxLayout()
         vlayout.addWidget(widget)
-        print(widget)
         frame = QtWidgets.QFrame(self)
         frame.setLayout(vlayout)
 
