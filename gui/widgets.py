@@ -613,7 +613,7 @@ class SliderGroup(QtWidgets.QWidget):
         label = QtWidgets.QLabel()
         label.setText(text or "")
 
-        value_box = QtWidgets.QSpinBox()
+        value_box = QtWidgets.QDoubleSpinBox()
         value_box.setFixedWidth(80)
 
         slider_layout = QtWidgets.QHBoxLayout()
