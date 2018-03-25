@@ -14,8 +14,28 @@ class Rotate(QtWidgets.QWidget):
 
         layout = QtWidgets.QVBoxLayout()
 
-        seed = widgets.SliderGroup(text="Seed")
-        seed.setMaxValue(2000)
+        random_range_hlayout = QtWidgets.QHBoxLayout()
+
+        min_vlayout = QtWidgets.QVBoxLayout()
+        min_label = QtWidgets.QLabel("Min value")
+        min_range = QtWidgets.QDoubleSpinBox()
+        min_range.setMinimum(-360)
+        min_range.setValue(-360)
+        min_vlayout.addWidget(min_label)
+        min_vlayout.addWidget(min_range)
+
+        max_vlayout = QtWidgets.QVBoxLayout()
+        max_label = QtWidgets.QLabel("Max value")
+        max_range = QtWidgets.QDoubleSpinBox()
+        max_range.setMaximum(360)
+        max_range.setValue(360)
+        max_vlayout.addWidget(max_label)
+        max_vlayout.addWidget(max_range)
+
+        random_range_hlayout.addLayout(min_vlayout)
+        random_range_hlayout.addLayout(max_vlayout)
+
+        # Default sliders
         rotate_y = widgets.SliderGroup(text="Rotate X")
         rotate_y.setMinValue(-360)
         rotate_y.setMaxValue(360)
@@ -42,16 +62,17 @@ class Rotate(QtWidgets.QWidget):
         options_layout.addWidget(random_btn)
 
         layout.addLayout(options_layout)
-        layout.addWidget(seed)
+        layout.addLayout(random_range_hlayout)
         layout.addWidget(rotate_y)
         layout.addWidget(rotate_x)
         layout.addWidget(rotate_z)
         layout.addWidget(apply_btn)
 
-        self.seed = seed
         self.relative = relative_btn
         self.absolute = absolute_btn
         self.random = random_btn
+        self.min_value = min_range
+        self.max_value = max_range
         self.apply = apply_btn
 
         self.rotate_y = rotate_y
@@ -71,18 +92,27 @@ class Rotate(QtWidgets.QWidget):
     def lock_sliders(self):
 
         state = not self.random.isChecked()
+
         self.rotate_x.setEnabled(state)
         self.rotate_y.setEnabled(state)
         self.rotate_z.setEnabled(state)
-        self.seed.setEnabled(not state)
+
+        self.min_value.setEnabled(not state)
+        self.max_value.setEnabled(not state)
 
     def on_apply(self):
 
         approach = "relative" if self.relative.isChecked() else "absolute"
         if self.random.isChecked():
-            x = random.seed(self.seed.getValue())
-            y = random.seed(self.seed.getValue())
-            z = random.seed(self.seed.getValue())
+            # random.seed(self.seed.getValue()
+            min_range = self.min_value.value()
+            max_range = self.max_value.value()
+            x = random.uniform(min_range, max_range)
+            print("x is: %s" % x)
+            y = random.uniform(min_range, max_range)
+            print("y is: %s" % y)
+            z = random.uniform(min_range, max_range)
+            print("z is: %s" % z)
         else:
             x = self.rotate_x.getValue()
             y = self.rotate_y.getValue()
