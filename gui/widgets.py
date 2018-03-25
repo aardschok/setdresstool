@@ -650,7 +650,7 @@ class SliderGroup(QtWidgets.QWidget):
         self.value.setMinimum(value)
 
     def getValue(self):
-        self.value.value()
+        return self.value.value()
 
     def getSliderValue(self):
         return self.slider.value()
