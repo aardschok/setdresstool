@@ -1,5 +1,5 @@
 from vendor.Qt import QtWidgets
-from ui import widgets
+from gui import widgets
 import core
 
 
