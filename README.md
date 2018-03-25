@@ -1,6 +1,6 @@
 # Set Dress Tool
 
-_This tool is currently a work in progress._
+_This tool is currently a work in progress and therefor subject to change._
 
 Tool for collection of plugins which benefit the set dress workflow.
 
@@ -12,6 +12,20 @@ This makes it easier to control the content of the tool by adding or removing mo
 
 ## Add plugins
 Each module which is found in the `plugins` and inherits the `QtWidgets.QWidget` will be added to the tool's window in a collapisble widget. This will ensure the user can store any number of plugins with saving screen space.
+
+## Future
+
+I have a few improvements in mind in regards to the overall layout of the tool.
+
+### Major improvements
+* Main window: the goal is to make a kind of limbo in which the plugins can reside in the way the user prefers.
+This includes floating windows, tabs and docked.
+* Plugins can be opened as a separate window in the host application
+* Preferences can be stored and restored
+
+### Minor improvements
+* Color code each plugin (title bar only)
+* Icon bar to open plugins in the main window
 
 ### Anatomy of a plugin:
 
