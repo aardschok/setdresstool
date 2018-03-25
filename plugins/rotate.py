@@ -17,14 +17,22 @@ class Rotate(QtWidgets.QWidget):
         seed = widgets.SliderGroup(text="Seed")
         seed.setMaxValue(2000)
         rotate_y = widgets.SliderGroup(text="Rotate X")
+        rotate_y.setMinValue(-360)
+        rotate_y.setMaxValue(360)
+
         rotate_x = widgets.SliderGroup(text="Rotate Y")
+        rotate_x.setMinValue(-360)
+        rotate_x.setMaxValue(360)
+
         rotate_z = widgets.SliderGroup(text="Rotate Z")
+        rotate_z.setMinValue(-360)
+        rotate_z.setMaxValue(360)
 
         options_layout = QtWidgets.QHBoxLayout()
 
         relative_btn = QtWidgets.QRadioButton("Relative")
         absolute_btn = QtWidgets.QRadioButton("Absolute")
-        random_btn = QtWidgets.QRadioButton("Random")
+        random_btn = QtWidgets.QCheckBox("Random")
         relative_btn.setChecked(True)
 
         apply_btn = QtWidgets.QPushButton("Apply")
@@ -70,13 +78,12 @@ class Rotate(QtWidgets.QWidget):
 
     def on_apply(self):
 
+        approach = "relative" if self.relative.isChecked() else "absolute"
         if self.random.isChecked():
-            approach = random.choice(["relative", "absolute"])
             x = random.seed(self.seed.getValue())
             y = random.seed(self.seed.getValue())
             z = random.seed(self.seed.getValue())
         else:
-            approach = "relative" if self.relative.isChecked() else "absolute"
             x = self.rotate_x.getValue()
             y = self.rotate_y.getValue()
             z = self.rotate_z.getValue()
