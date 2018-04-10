@@ -13,9 +13,11 @@ class Translate(QtWidgets.QWidget):
         self.setFixedWidth(250)
 
         layout = QtWidgets.QVBoxLayout()
+        layout.setContentsMargins(6, 2, 6, 2)
 
         seed = widgets.SliderGroup(text="Seed")
         seed.setMaxValue(2000)
+
         translate_y = widgets.SliderGroup(text="Translate X")
         translate_x = widgets.SliderGroup(text="Translate Y")
         translate_z = widgets.SliderGroup(text="Translate Z")

@@ -13,9 +13,11 @@ class Rotate(QtWidgets.QWidget):
         self.setFixedWidth(250)
 
         layout = QtWidgets.QVBoxLayout()
+        layout.setContentsMargins(6, 2, 6, 2)
 
         seed = widgets.SliderGroup(text="Seed")
         seed.setMaxValue(2000)
+
         rotate_y = widgets.SliderGroup(text="Rotate X")
         rotate_x = widgets.SliderGroup(text="Rotate Y")
         rotate_z = widgets.SliderGroup(text="Rotate Z")
