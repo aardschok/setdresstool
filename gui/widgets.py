@@ -11,7 +11,7 @@ class AccordionItem(QtWidgets.QGroupBox):
 
         # create the layout
         layout = QtWidgets.QVBoxLayout()
-        layout.setContentsMargins(6, 6, 6, 6)
+        layout.setContentsMargins(0, 6, 0, 6)
         layout.setSpacing(0)
         layout.addWidget(widget)
 
@@ -35,19 +35,22 @@ class AccordionItem(QtWidgets.QGroupBox):
         self.setTitle(title)
 
     def accordionWidget(self):
+        """Grabs the parent item for the accordian widget
+
+        Returns:
+            accordianwidget.AccordianWidget
+
         """
-            \remarks    grabs the parent item for the accordian widget
-            \return             <blurdev.gui.widgets.accordianwidget.AccordianWidget>
-       """
         return self._accordianWidget
 
     def customData(self, key, default=None):
+        """Return a custom pointer to information stored with this item
+        Args:
+           key (str)
+           default (variant): default value to return if the key was not found
+        Returns:
+           <variant> data
         """
-            \remarks    return a custom pointer to information stored with this item
-            \param              key                     <str>
-            \param              default         <variant>       default value to return if the key was not found
-            \return             <variant> data
-       """
         return self._customData.get(str(key), default)
 
     def dragEnterEvent(self, event):
@@ -143,7 +146,8 @@ class AccordionItem(QtWidgets.QGroupBox):
         return self._collapsible
 
     def __drawTriangle(self, painter, x, y):
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 160), QtCore.Qt.SolidPattern)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 160),
+                             QtCore.Qt.SolidPattern)
         if not self.isCollapsed():
             tl, tr, tp = (QtCore.QPoint(x + 9, y + 8),
                           QtCore.QPoint(x + 19, y + 8),
@@ -151,7 +155,8 @@ class AccordionItem(QtWidgets.QGroupBox):
             points = [tl, tr, tp]
             triangle = QtGui.QPolygon(points)
         else:
-            tl, tr, tp = QtCore.QPoint(x + 11, y + 6), QtCore.QPoint(x + 16, y + 11), QtCore.QPoint(
+            tl, tr, tp = QtCore.QPoint(x + 11, y + 6), QtCore.QPoint(x + 16,
+                                                                     y + 11), QtCore.QPoint(
                 x + 11, y + 16.0)
             points = [tl, tr, tp]
             triangle = QtGui.QPolygon(points)
@@ -200,7 +205,8 @@ class AccordionItem(QtWidgets.QGroupBox):
         # draw a square style
         if self._rolloutStyle == 3:
             # draw the text
-            painter.drawText(x + 33, y + 3, w, 16, QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop,
+            painter.drawText(x + 33, y + 3, w, 16,
+                             QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop,
                              self.title())
 
             self.__drawTriangle(painter, x, y)
@@ -232,7 +238,8 @@ class AccordionItem(QtWidgets.QGroupBox):
             headerHeight = 20
 
             headerRect = QtCore.QRect(x + 1, y + 1, w - 1, headerHeight)
-            headerRectShadow = QtCore.QRect(x - 1, y - 1, w + 1, headerHeight + 2)
+            headerRectShadow = QtCore.QRect(x - 1, y - 1, w + 1,
+                                            headerHeight + 2)
 
             # Highlight
             pen = QtGui.QPen(self.palette().color(QtGui.QPalette.Light))
@@ -255,7 +262,8 @@ class AccordionItem(QtWidgets.QGroupBox):
 
                 offSet = headerHeight + 3
                 bodyRect = QtCore.QRect(x, y + offSet, w, h - offSet)
-                bodyRectShadow = QtCore.QRect(x + 1, y + offSet, w + 1, h - offSet + 1)
+                bodyRectShadow = QtCore.QRect(x + 1, y + offSet, w + 1,
+                                              h - offSet + 1)
                 painter.drawRect(bodyRect)
 
                 pen.setColor(self.palette().color(QtGui.QPalette.Light))
@@ -288,7 +296,8 @@ class AccordionItem(QtWidgets.QGroupBox):
             painter.drawRect(brect)
 
             painter.setRenderHint(painter.Antialiasing, False)
-            painter.setBrush(self.palette().color(QtGui.QPalette.Window).darker(120))
+            painter.setBrush(
+                self.palette().color(QtGui.QPalette.Window).darker(120))
             painter.drawRect(x + 10, y + 1, w - 20, 16)
             painter.drawText(x + 16, y + 1, w - 32, 16,
                              QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter, text)
@@ -361,7 +370,6 @@ class AccordionItem(QtWidgets.QGroupBox):
 
 
 class AccordionWidget(QtWidgets.QScrollArea):
-
     itemCollapsed = QtCore.Signal(AccordionItem)
     itemMenuRequested = QtCore.Signal(AccordionItem)
     itemDragFailed = QtCore.Signal(AccordionItem)
@@ -395,8 +403,8 @@ class AccordionWidget(QtWidgets.QScrollArea):
         self._itemClass = AccordionItem
 
         layout = QtWidgets.QVBoxLayout()
-        layout.setContentsMargins(2, 2, 2, 2)
-        layout.setSpacing(2)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         layout.addStretch(1)
 
         widget.setLayout(layout)
@@ -428,12 +436,12 @@ class AccordionWidget(QtWidgets.QScrollArea):
             item = layout.itemAt(0)
 
             # remove the item from the layout
-            w = item.widget()
+            widget = item.widget()
             layout.removeItem(item)
 
             # close the widget and delete it
-            w.close()
-            w.deleteLater()
+            widget.close()
+            widget.deleteLater()
 
         self.setUpdatesEnabled(True)
 
@@ -481,7 +489,8 @@ class AccordionWidget(QtWidgets.QScrollArea):
 
     def itemAt(self, index):
         layout = self.widget().layout()
-        if 0 <= index and index < layout.count() - 1:
+        layout_count = layout.count() - 1
+        if index <= 0 and index < layout_count:
             return layout.itemAt(index).widget()
         return None
 
@@ -584,14 +593,16 @@ class AccordionWidget(QtWidgets.QScrollArea):
     def takeAt(self, index):
         self.setUpdatesEnabled(False)
         layout = self.widget().layout()
-        widget = None
-        if 0 <= index and index < layout.count() - 1:
+        layout_count = layout.count() - 1
+        if index <= 0 and index < layout_count:
             item = layout.itemAt(index)
             widget = item.widget()
 
             layout.removeItem(item)
             widget.close()
+
         self.setUpdatesEnabled(True)
+
         return widget
 
     def widgetAt(self, index):
@@ -608,23 +619,22 @@ class SliderGroup(QtWidgets.QWidget):
     def __init__(self, parent=None, text=None):
         QtWidgets.QWidget.__init__(self, parent)
 
-        layout = QtWidgets.QVBoxLayout()
-
         label = QtWidgets.QLabel()
         label.setText(text or "")
 
-        value_box = QtWidgets.QSpinBox()
-        value_box.setFixedWidth(80)
+        layout = QtWidgets.QHBoxLayout()
+        layout.setAlignment(QtCore.Qt.AlignLeft)
+        layout.setContentsMargins(0, 0, 0, 0)
 
-        slider_layout = QtWidgets.QHBoxLayout()
+        value_box = QtWidgets.QSpinBox()
+        value_box.setFixedWidth(50)
+
         slider = QtWidgets.QSlider()
         slider.setOrientation(QtCore.Qt.Horizontal)
 
-        slider_layout.addWidget(value_box)
-        slider_layout.addWidget(slider)
-
         layout.addWidget(label)
-        layout.addLayout(slider_layout)
+        layout.addWidget(value_box)
+        layout.addWidget(slider)
 
         self.label = label
         self.slider = slider
@@ -675,18 +685,25 @@ class Sample(QtWidgets.QDialog):
 
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self, parent)
-        self.setLayout(QtWidgets.QVBoxLayout())
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.setContentsMargins(0, 2, 0, 2)
+        self.setLayout(layout)
+
         self.accWidget = AccordionWidget(self)
         self.accWidget.addItem("A", self.buildFrame())
         self.accWidget.addItem("B", self.buildFrame())
         self.accWidget.addItem("Sliders", StressTest())
+
         self.accWidget.setRolloutStyle(self.accWidget.Maya)
         self.accWidget.setSpacing(0)  # More like Maya but I like some padding.
+
         self.layout().addWidget(self.accWidget)
 
     def buildFrame(self):
         someFrame = QtWidgets.QFrame(self)
-        someFrame.setLayout(QtWidgets.QVBoxLayout())
+        layout = QtWidgets.QVBoxLayout()
+        someFrame.setLayout(layout)
         someFrame.layout().addWidget(QtWidgets.QPushButton("Test"))
         return someFrame
 
@@ -697,6 +714,7 @@ class Sample(QtWidgets.QDialog):
 
 if __name__ == '__main__':
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     w = Sample()
     w.show()
